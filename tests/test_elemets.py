@@ -42,3 +42,6 @@ class TestElements:
         links.open_new_tab()
         links.verify_url_new_tab()
         links.click_and_verify_broken_link()
+
+    def test_upload_download(self):
+        pass
