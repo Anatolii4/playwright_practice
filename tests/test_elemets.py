@@ -2,6 +2,8 @@ import time
 
 from pages.elements.check_box import CheckBox
 from pages.elements.buttons import Buttons
+from pages.elements.dates_picker import DatesPicker
+from pages.elements.download_upload import DownloadUpload
 from pages.elements.links import Links
 from pages.elements.text_box import TextBox
 from playwright.sync_api import Page, expect
@@ -43,5 +45,13 @@ class TestElements:
         links.verify_url_new_tab()
         links.click_and_verify_broken_link()
 
-    def test_upload_download(self):
-        pass
+    def test_upload_download(self, page: Page):
+        download_upload = DownloadUpload(page)
+        download_upload.open_page()
+        download_upload.download_file()
+        actual_path = download_upload.upload_file()
+        assert actual_path == r"C:\fakepath\Screenshot_1.png", "The downloaded path does not math"
+
+    def test_date_pickers(self, page):
+        dates_picker = DatesPicker(page)
+        dates_picker.open_page()
